@@ -7,6 +7,7 @@ use App\Plan;
 use App\Timesheet;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TimesheetController extends Controller
 {
@@ -58,32 +59,35 @@ class TimesheetController extends Controller
         $lastOfMonth = Carbon::create($validatedData['year'], $validatedData['month'])->lastOfMonth();
 
         // 指定された年月の初日と最終日をつかってループ処理をする
-        for ($date = $firstOfMonth; $date <= $lastOfMonth; $date->addDay()) {
-            // $dayは何曜日か
-            $dayName = $date->isoFormat('dddd');
+        // エラーが発生したときに途中で作成されたデータを破棄するためにトランザクションを利用
+        DB::transaction(function () use ($firstOfMonth, $lastOfMonth) {
+            for ($date = $firstOfMonth; $date <= $lastOfMonth; $date->addDay()) {
+                // $dayは何曜日か
+                $dayName = $date->isoFormat('dddd');
 
-            // その曜日のplanは何か？
-            // 会社のidはログインユーザーが所属しているidを取得したい
-            $plans = $this->plan->where(['company_id' => 1, 'day_name' => $dayName])->get();
+                // その曜日のplanは何か？
+                // 会社のidはログインユーザーが所属しているidを取得したい
+                $plans = $this->plan->where(['company_id' => 1, 'day_name' => $dayName])->get();
 
-            // そのplanをOKと言っているひとは誰か
-            foreach ($plans as $plan) {
-                // 会社が必要な人数よりも多いかどうかで処理を変える、そうしないとエラーになる
-                if ($plan->users->count() >= $plan->number_of_people) {
-                    $users = $plan->users->random($plan->number_of_people);
-                } else {
-                    $users = $plan->users->random($plan->users->count());
-                }
-                // データ追加する、もし対象ユーザーがいなくてもループが回らないのでエラーにはならない
-                foreach ($users as $user) {
-                    $this->timesheets->create([
-                        'plan_id' => $plan->id,
-                        'user_id' => $user->id,
-                        'date'    => $date->format('Y-m-d'),
-                    ]);
+                // そのplanをOKと言っているひとは誰か
+                foreach ($plans as $plan) {
+                    // 会社が必要な人数よりも多いかどうかで処理を変える、そうしないとエラーになる
+                    if ($plan->users->count() >= $plan->number_of_people) {
+                        $users = $plan->users->random($plan->number_of_people);
+                    } else {
+                        $users = $plan->users->random($plan->users->count());
+                    }
+                    // データ追加する、もし対象ユーザーがいなくてもループが回らないのでエラーにはならない
+                    foreach ($users as $user) {
+                        $this->timesheets->create([
+                            'plan_id' => $plan->id,
+                            'user_id' => $user->id,
+                            'date'    => $date->format('Y-m-d'),
+                        ]);
+                    }
                 }
             }
-        }
+        });
 
         return redirect('/timesheets')->with('message', $validatedData['year'] . '年' . $validatedData['month'] . '月のタイムシートを作成しました');
     }
