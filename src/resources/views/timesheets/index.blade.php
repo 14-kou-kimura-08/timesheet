@@ -65,24 +65,33 @@
 </head>
 <body>
 <div class="flex-center position-ref full-height">
-    @if (Route::has('login'))
-        <div class="top-right links">
-            @auth
-                <a href="{{ url('/home') }}">Home</a>
-            @else
-                <a href="{{ route('login') }}">Login</a>
-
-                @if (Route::has('register'))
-                    <a href="{{ route('register') }}">Register</a>
-                @endif
-            @endauth
-        </div>
+    @if (session('message'))
+        <p class="alert alert-success">
+            {{ session('message') }}
+        </p>
     @endif
-
     <div class="content">
         <div class="title m-b-md">
             <form action="/timesheets" method="post">
                 @csrf
+                <select name="year">
+                    <option value="2020">2020年</option>
+                    <option value="2021">2021年</option>
+                </select>
+                <select name="month">
+                    <option value="1">1月</option>
+                    <option value="2">2月</option>
+                    <option value="3">3月</option>
+                    <option value="4">4月</option>
+                    <option value="5">5月</option>
+                    <option value="6">6月</option>
+                    <option value="7">7月</option>
+                    <option value="8">8月</option>
+                    <option value="9">9月</option>
+                    <option value="10">10月</option>
+                    <option value="11">11月</option>
+                    <option value="12">12月</option>
+                </select>
                 <input type="submit" value="タイムシート作成">
             </form>
         </div>

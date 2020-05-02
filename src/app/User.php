@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'company_id', 'is_admin'
     ];
 
     /**
@@ -36,4 +36,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * The plans that belong to the user.
+     */
+    public function plans()
+    {
+        return $this->belongsToMany('App\Plan', 'plan_user');
+    }
 }
