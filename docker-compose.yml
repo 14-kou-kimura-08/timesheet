@@ -43,6 +43,8 @@ services:
       - MYSQL_PASSWORD=${DB_PASS}
       - MYSQL_ROOT_PASSWORD=${DB_PASS}
       - TZ=${TZ}
+    ports:
+      - 13306:3306
 
 volumes:
   db-store:
