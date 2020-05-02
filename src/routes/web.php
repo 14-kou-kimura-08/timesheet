@@ -19,3 +19,4 @@ Route::get('/', function () {
 
 Route::get('/timesheets', 'TimesheetController@index');
 Route::post('/timesheets', 'TimesheetController@store');
+Route::post('/timesheets/delete', 'TimesheetController@delete');

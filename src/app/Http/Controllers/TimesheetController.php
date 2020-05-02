@@ -91,4 +91,30 @@ class TimesheetController extends Controller
 
         return redirect('/timesheets')->with('message', $validatedData['year'] . '年' . $validatedData['month'] . '月のタイムシートを作成しました');
     }
+
+    public function delete(Request $request)
+    {
+        $validatedData = $request->validate([
+            'year'  => 'required|numeric',
+            'month' => 'required|numeric',
+        ]);
+
+        // 指定された年月の初日を取得
+        $firstOfMonth = Carbon::create($validatedData['year'], $validatedData['month'])->firstOfMonth();
+
+        // 指定された年月の最終日を取得
+        $lastOfMonth = Carbon::create($validatedData['year'], $validatedData['month'])->lastOfMonth();
+
+        $deletedCount = $this->timesheets->where('date', '>=' , $firstOfMonth->format('Y-m-d'))
+                         ->where('date', '<=' , $lastOfMonth->format('Y-m-d'))
+                         ->delete();
+
+        if ($deletedCount > 0) {
+            $message = $validatedData['year'] . '年' . $validatedData['month'] . '月のタイムシートを削除しました';
+        } else {
+            $message = $validatedData['year'] . '年' . $validatedData['month'] . '月のデータはありませんでした。';
+        }
+
+        return redirect('/timesheets')->with('message', $message);
+    }
 }
