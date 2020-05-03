@@ -66,6 +66,16 @@ class TimesheetController extends Controller
         // 指定された年月の最終日を取得
         $lastOfMonth = Carbon::create($validatedData['year'], $validatedData['month'])->lastOfMonth();
 
+        // 指定された年月のタイムシートを取得
+        $timesheet = $this->timesheets->where('date', '>=' , $firstOfMonth->format('Y-m-d'))
+                                      ->where('date', '<=' , $lastOfMonth->format('Y-m-d'))
+                                      ->get();
+
+        // 指定された年月のタイムシートがある場合、リダイレクト
+        if ($timesheet->isNotEmpty()) {
+            return redirect('/timesheets')->with('message', $validatedData['year'] . '年' . $validatedData['month'] . '月のタイムシートは既に作成されています。');
+        }
+
         // 休み申請を取得
         $holidayRequests = $this->holidayRequests->where('company_id', 1)
             ->where('date', '>=' , $firstOfMonth->format('Y-m-d'))
