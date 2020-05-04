@@ -65,13 +65,13 @@
 </head>
 <body>
 <div class="flex-center position-ref full-height">
-    @if (session('message'))
-        <p class="alert alert-success">
-            {{ session('message') }}
-        </p>
-    @endif
     <div class="content">
-        <div class="title m-b-md">
+        <div class="m-b-md">
+            @if (session('message'))
+                <p class="alert alert-success">
+                    {{ session('message') }}
+                </p>
+            @endif
             <form action="/timesheets" method="post">
                 @csrf
                 <select name="year">
