@@ -1,78 +1,30 @@
-<p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
+## テーブル構成
+<img width="1317" alt="スクリーンショット 2020-05-04 10 26 10" src="https://user-images.githubusercontent.com/29177665/80930948-c2058d80-8df1-11ea-9a63-3f5760601d74.png">
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+## 仮データ
+### companies
+<img width="562" alt="スクリーンショット 2020-05-04 10 21 57" src="https://user-images.githubusercontent.com/29177665/80930881-4efc1700-8df1-11ea-8382-71fa9f9c1fce.png">
 
-## About Laravel
+### company_plans
+<img width="562" alt="スクリーンショット 2020-05-04 10 22 06" src="https://user-images.githubusercontent.com/29177665/80930880-4efc1700-8df1-11ea-98e5-dd47e117417b.png">
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### plan_user
+<img width="562" alt="スクリーンショット 2020-05-04 10 22 33" src="https://user-images.githubusercontent.com/29177665/80930877-4dcaea00-8df1-11ea-95e0-3e699960c1b9.png">
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### users
+<img width="562" alt="スクリーンショット 2020-05-04 10 22 53" src="https://user-images.githubusercontent.com/29177665/80930875-4c99bd00-8df1-11ea-8415-aeb27af22503.png">
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### holiday_requests
+<img width="562" alt="スクリーンショット 2020-05-04 10 22 23" src="https://user-images.githubusercontent.com/29177665/80930879-4e638080-8df1-11ea-9f9f-73122fa38d6f.png">
 
-## Learning Laravel
+## シートの新規作成
+![create](https://user-images.githubusercontent.com/29177665/80930503-f1ff6180-8dee-11ea-9596-f42687982e38.gif)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### 既に作成されている場合、新規作成できません
+![cannot_create](https://user-images.githubusercontent.com/29177665/80930502-f166cb00-8dee-11ea-9e96-604e3da8ffb0.gif)
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## シートの削除
+![delete](https://user-images.githubusercontent.com/29177665/80930500-f0ce3480-8dee-11ea-9749-03b5ec1b31b1.gif)
 
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
-- [Abdel Elrafa](https://abdelelrafa.com)
-- [Hyper Host](https://hyper.host)
-- [Appoly](https://www.appoly.co.uk)
-- [OP.GG](https://op.gg)
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## 月ごとに表示
+![timesheet_list](https://user-images.githubusercontent.com/29177665/80930495-eb70ea00-8dee-11ea-9cda-aa9a2d958d2c.gif)
