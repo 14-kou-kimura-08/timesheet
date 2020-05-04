@@ -53,6 +53,46 @@ class TimesheetController extends Controller
         return view('timesheets.index');
     }
 
+    /**
+     * @param int $year
+     * @param int $month
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function show(int $year, int $month)
+    {
+        // 指定された年月の初日を取得
+        $firstOfMonth = Carbon::create($year, $month)->firstOfMonth();
+
+        // 指定された年月の最終日を取得
+        $lastOfMonth = Carbon::create($year, $month)->lastOfMonth();
+
+        // 指定された年月のタイムシートを取得
+        $timesheets = $this->timesheets->where('date', '>=' , $firstOfMonth->format('Y-m-d'))
+                                      ->where('date', '<=' , $lastOfMonth->format('Y-m-d'))
+                                      ->get();
+
+        // タイムシートを表示しやすいように整形
+        $transformedTimesheets = [];
+        foreach($timesheets as $timesheet) {
+            $transformedTimesheets[$timesheet->date][$timesheet->plan->name][] = $timesheet->user->name;
+        }
+
+        // 整形したタイムシートが空じゃないかを確認、空の場合は、Viewでタイムシートが存在しないことを表示
+        if (!empty($transformedTimesheets)) {
+            // 日付が歯抜けになっている可能性があるので、整形
+            for ($date = $firstOfMonth; $date <= $lastOfMonth; $date->addDay()) {
+                if (!array_key_exists($date->format('Y-m-d'), $transformedTimesheets)) {
+                    $transformedTimesheets[$date->format('Y-m-d')] = [];
+                }
+            }
+
+            // 日付順に並び替え
+            ksort($transformedTimesheets);
+        }
+
+        return view('timesheets.show', ['transformedTimesheets' => $transformedTimesheets]);
+    }
+
     public function store(Request $request)
     {
         $validatedData = $request->validate([

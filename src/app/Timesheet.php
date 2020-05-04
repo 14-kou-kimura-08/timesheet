@@ -14,4 +14,20 @@ class Timesheet extends Model
     protected $fillable = [
         'plan_id', 'user_id', 'date'
     ];
+
+    /**
+     * Get the user.
+     */
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
+
+    /**
+     * Get the plan.
+     */
+    public function plan()
+    {
+        return $this->belongsTo('App\Plan');
+    }
 }
